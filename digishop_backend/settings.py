@@ -126,18 +126,18 @@ CORS_ALLOW_ALL_ORIGINS = True
 import dj_database_url
 import os
 
-ALLOWED_HOSTS = ['*']
-
-CSRF_TRUSTED_ORIGINS = os.environ.get(
-    'CSRF_TRUSTED_ORIGINS',
-    'https://digishop-backend-production-56f2.up.railway.app'
-).split(',')
-
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'digishop_db',
+            'USER': 'lenovo',
+            'PASSWORD': 'momo86931',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
