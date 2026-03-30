@@ -128,6 +128,10 @@ import os
 
 # Production settings
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://digishop-backend-production-56f2.up.railway.app',
+    'https://misterlintello-svg.github.io',
+]
 
 # Whitenoise pour les fichiers statiques
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
