@@ -131,6 +131,24 @@ CORS_ALLOW_ALL_ORIGINS = True
 import dj_database_url
 import os
 
+# Hosts autorisés
+ALLOWED_HOSTS = ['*']
+
+# CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://digishop-backend-production-56f2.up.railway.app',
+    'https://misterlintello-svg.github.io',
+    'http://localhost',
+    'http://127.0.0.1',
+]
+
+# Whitenoise pour les fichiers statiques
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Base de données Railway
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
@@ -139,10 +157,12 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'digishop_db',
-            'USER': 'lenovo',
-            'PASSWORD': 'momo86931',
+            'USER': 'postgres',
+            'PASSWORD': 'admin123',
             'HOST': 'localhost',
             'PORT': '5432',
         }
     }
+
+# Clé secrète
 SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
