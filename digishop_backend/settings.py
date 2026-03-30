@@ -126,21 +126,18 @@ CORS_ALLOW_ALL_ORIGINS = True
 import dj_database_url
 import os
 
-# Production settings
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = [
-    'https://digishop-backend-production-56f2.up.railway.app',
-    'https://misterlintello-svg.github.io',
-]
 
-# Whitenoise pour les fichiers statiques
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://digishop-backend-production-56f2.up.railway.app'
+).split(',')
+
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Base de données Railway
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
-# Clé secrète depuis variable d'environnement
 SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
