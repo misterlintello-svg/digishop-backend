@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'digishop_db',
-        'USER': 'postgres',
-        'PASSWORD': 'admin123',
+        'USER': 'lenovo',
+        'PASSWORD': 'momo86931',
         'HOST': 'localhost',
         'PORT': '5432',
     }
