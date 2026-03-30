@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-(9vc)4zfweyo(gg$&99hj&w=2l*ffwkq8=ck0vdrwwtw%_ief2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+    'digishop-backend-production-56f2.up.railway.app',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
